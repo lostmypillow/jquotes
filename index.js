@@ -23,7 +23,8 @@ async function unzipGZ() {
 const decompressedData = unzipGZ();
 
 function getRandomQuote() {
-  const stuff = decompressedData[Math.floor(Math.random() * decompressedData.length)];
+  const stuff =
+    decompressedData[Math.floor(Math.random() * decompressedData.length)];
   return stuff;
 }
 bwutton.onclick = async function () {
@@ -50,7 +51,6 @@ bwutton.onclick = async function () {
   cat.setAttribute("aria-busy", false);
   // });
 };
-
 
 // ignore below:
 // const button = document.getElementById("button");
