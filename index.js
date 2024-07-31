@@ -41,7 +41,7 @@ bwutton.onclick = async function () {
   const content = await getRandomQuote();
 
   //set HTML contents to generated quote
-  meow.textContent = content.quote;
+  quoteSpace.textContent = content.quote;
   authorSpace.textContent = content.author;
   categorySpace.textContent = content.category;
 
