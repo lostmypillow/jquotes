@@ -23,7 +23,7 @@ async function unzipGZ() {
 const decompressedData = unzipGZ();
 
 function getRandomQuote() {
-  const stuff = decompressedData[Math.floor(Math.random() * decomp.length)];
+  const stuff = decompressedData[Math.floor(Math.random() * decompressedData.length)];
   return stuff;
 }
 bwutton.onclick = async function () {
