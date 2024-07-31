@@ -1,11 +1,10 @@
 import { fileSave } from "https://unpkg.com/browser-fs-access@0.31.0/dist/index.modern.js";
 
-const meow = document.getElementById("test");
-const author = document.getElementById("author");
-const cat = document.getElementById("cat");
+const quoteSpace = document.getElementById("quote");
+const authorSpace = document.getElementById("author");
+const categorySpace = document.getElementById("category");
 const bwutton = document.getElementById("get");
-
-async function getRandomQuote() {
+async function unzipGZ() {
   if ("CompressionStream" in window) {
     const compressedReadableStream = await fetch("data.gz").then(
       (response) => response.body
@@ -15,33 +14,45 @@ async function getRandomQuote() {
       new DecompressionStream("gzip")
     );
     const decomp = await new Response(decompressedReadableStream).json();
-
-    const stuff = decomp[Math.floor(Math.random() * decomp.length)];
-    return stuff;
+    return decomp;
   } else {
     alert("Your browser doesn't support the CompressionStream API.");
   }
 }
+
+const decompressedData = unzipGZ();
+
+function getRandomQuote() {
+  const stuff = decompressedData[Math.floor(Math.random() * decomp.length)];
+  return stuff;
+}
 bwutton.onclick = async function () {
-  meow.textContent = "";
-  author.textContent = "";
-  cat.textContent = "";
-  meow.setAttribute("aria-busy", true);
+  // clear previous content
+  quoteSpace.textContent = "";
+  authorSpace.textContent = "";
+  categorySpace.textContent = "";
+
+  // make loading spinner visible
+  quoteSpace.setAttribute("aria-busy", true);
   author.setAttribute("aria-busy", true);
-  cat.setAttribute("aria-busy", true);
-  //   fetch("./data.json")
-  //     .then((response) => response.json())
-  //     .then((json) => {
+  categorySpace.setAttribute("aria-busy", true);
+
   const content = await getRandomQuote();
+
+  //set HTML contents to generated quote
   meow.textContent = content.quote;
-  author.textContent = content.author;
-  cat.textContent = content.category;
+  authorSpace.textContent = content.author;
+  categorySpace.textContent = content.category;
+
+  // make loading spinner invisible
   meow.setAttribute("aria-busy", false);
   author.setAttribute("aria-busy", false);
   cat.setAttribute("aria-busy", false);
   // });
 };
 
+
+// ignore below:
 // const button = document.getElementById("button");
 
 // if ("CompressionStream" in window) {
