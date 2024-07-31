@@ -14,21 +14,22 @@
 
             <ul>
 
-                <li><strong>JQuotes Test</strong></li>
+                <li>
+                    <h1>JQuotes Test</h1>
+                </li>
 
             </ul>
         </nav>
 
         <article>
 
-            <header>
-                <h1>Random Quote</h1>
-            </header>
+            <header class="grid">
 
-            <p>
-                <i id="quote">
-<!-- Random quote goes here -->
-                </i>
+                <button id="get">Get Random Quote</button>
+            </header>
+            <label for="quote">Random Quote:</label>
+            <p id="quote">
+                <!-- Random quote goes here -->
             </p>
 
             <label for="author">
@@ -36,22 +37,22 @@
             </label>
 
             <p id="author">
-<!-- Quote author goes here -->
+                <!-- Quote author goes here -->
+            </p><label for="category">
+                Category:
+            </label>
+
+            <p id="category">
+                <!-- Category goes here -->
             </p>
             <footer>
-                <label for="category">
-                    Category:
-                </label>
 
-                <p id="category">
-<!-- Category goes here -->
-                </p>
-
+                <span id="disclaimer">Unzipping may take a while, due to various restrictions. Will be fixed in a later date</span>
             </footer>
         </article>
 
 
-        <button id="get">Get Random quote</button>
+
         <!-- <button id="button">Download</button>
         <button id="read">Read</button> -->
     </main>

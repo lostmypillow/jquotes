@@ -4,11 +4,13 @@ const quoteSpace = document.getElementById("quote");
 const authorSpace = document.getElementById("author");
 const categorySpace = document.getElementById("category");
 const bwutton = document.getElementById("get");
+const disclaimer = document.getElementById("disclaimer");
 async function unzipGZ() {
   if ("CompressionStream" in window) {
-    bwutton.textContent = "Unzipping data, please wait..."
-    bwutton.setAttribute('aria-busy', true)
-    bwutton.setAttribute('disabled', true)
+    bwutton.textContent = "Unzipping data, please wait...";
+    bwutton.setAttribute("aria-busy", true);
+    bwutton.setAttribute("disabled", true);
+    disclaimer.style.visibility = "visible";
     const compressedReadableStream = await fetch("data.gz").then(
       (response) => response.body
     );
@@ -17,11 +19,11 @@ async function unzipGZ() {
       new DecompressionStream("gzip")
     );
     const decomp = await new Response(decompressedReadableStream).json();
-    bwutton.textContent = "Get Random quote"
-    bwutton.setAttribute('aria-busy', false)
-    bwutton.removeAttribute('disabled')
+    bwutton.textContent = "Get Random quote";
+    bwutton.setAttribute("aria-busy", false);
+    bwutton.removeAttribute("disabled");
+    disclaimer.style.visibility = "hidden";
     return decomp;
-    
   } else {
     alert("Your browser doesn't support the CompressionStream API.");
   }
@@ -32,7 +34,7 @@ const decompressedData = await unzipGZ();
 function getRandomQuote() {
   const stuff =
     decompressedData[Math.floor(Math.random() * decompressedData.length)];
-    console.log(stuff)
+  // console.log(stuff)
   return stuff;
 }
 bwutton.onclick = function () {
