@@ -6,6 +6,9 @@ const categorySpace = document.getElementById("category");
 const bwutton = document.getElementById("get");
 async function unzipGZ() {
   if ("CompressionStream" in window) {
+    bwutton.textContent = "Unzipping data, please wait..."
+    bwutton.setAttribute('aria-busy', true)
+    bwutton.setAttribute('disabled', true)
     const compressedReadableStream = await fetch("data.gz").then(
       (response) => response.body
     );
@@ -14,7 +17,11 @@ async function unzipGZ() {
       new DecompressionStream("gzip")
     );
     const decomp = await new Response(decompressedReadableStream).json();
+    bwutton.textContent = "Get Random quote"
+    bwutton.setAttribute('aria-busy', false)
+    bwutton.removeAttribute('disabled')
     return decomp;
+    
   } else {
     alert("Your browser doesn't support the CompressionStream API.");
   }
@@ -28,7 +35,7 @@ function getRandomQuote() {
     console.log(stuff)
   return stuff;
 }
-bwutton.onclick = async function () {
+bwutton.onclick = function () {
   // clear previous content
   quoteSpace.textContent = "";
   authorSpace.textContent = "";
@@ -39,7 +46,7 @@ bwutton.onclick = async function () {
   author.setAttribute("aria-busy", true);
   categorySpace.setAttribute("aria-busy", true);
 
-  const content = await getRandomQuote();
+  const content = getRandomQuote();
 
   //set HTML contents to generated quote
   quoteSpace.textContent = content.quote;
