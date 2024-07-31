@@ -20,11 +20,12 @@ async function unzipGZ() {
   }
 }
 
-const decompressedData = unzipGZ();
+const decompressedData = await unzipGZ();
 
 function getRandomQuote() {
   const stuff =
     decompressedData[Math.floor(Math.random() * decompressedData.length)];
+    console.log(stuff)
   return stuff;
 }
 bwutton.onclick = async function () {
@@ -45,10 +46,9 @@ bwutton.onclick = async function () {
   authorSpace.textContent = content.author;
   categorySpace.textContent = content.category;
 
-  // make loading spinner invisible
-  meow.setAttribute("aria-busy", false);
-  author.setAttribute("aria-busy", false);
-  cat.setAttribute("aria-busy", false);
+  quoteSpace.setAttribute("aria-busy", false);
+  authorSpace.setAttribute("aria-busy", false);
+  categorySpace.setAttribute("aria-busy", false);
   // });
 };
 
