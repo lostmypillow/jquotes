@@ -43,7 +43,7 @@ function getRandomQuote() {
 
 
 async function getData() {
-  const url = "/quote";
+  const url = "quote";
   try {
     const response = await fetch(url);
     if (!response.ok) {
