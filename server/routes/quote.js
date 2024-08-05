@@ -2,8 +2,8 @@ var express = require("express");
 var router = express.Router();
 const fs = require("fs");
 const filePath = "./public/data/data.json";
-const inputPath = "./public/data.zip";
-const outputPath = "./public/data";
+const inputPath = "/data.zip";
+const outputPath = "/data/";
 const decompress = require("decompress");
 const getRandQuote = require("../lib/getRandQuote");
 
