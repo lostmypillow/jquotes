@@ -70,7 +70,7 @@ bwutton.onclick = async function () {
   // categorySpace.setAttribute("aria-busy", true);
 
   await getData();
-console.log(content)
+console.log("ok")
   //set HTML contents to generated quote
  
 
