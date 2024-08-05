@@ -1,2 +1,3 @@
 server/public/data/*
 server/node_modules
+data.json
