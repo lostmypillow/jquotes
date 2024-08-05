@@ -50,8 +50,10 @@ async function getData() {
       throw new Error(`Response status: ${response.status}`);
     }
 
-    const json = await response.json();
-    return json
+    const content = await response.json();
+    quoteSpace.textContent = content.quote;
+    authorSpace.textContent = content.author;
+    categorySpace.textContent = content.category;
   } catch (error) {
     console.error(error.message);
   }
@@ -67,12 +69,10 @@ bwutton.onclick = async function () {
   // author.setAttribute("aria-busy", true);
   // categorySpace.setAttribute("aria-busy", true);
 
-  const content = await getData();
+  await getData();
 console.log(content)
   //set HTML contents to generated quote
-  quoteSpace.textContent = content.quote;
-  authorSpace.textContent = content.author;
-  categorySpace.textContent = content.category;
+ 
 
   // quoteSpace.setAttribute("aria-busy", false);
   // authorSpace.setAttribute("aria-busy", false);
