@@ -5,7 +5,9 @@ An Express API that returns a random quotes from a JSON file of quotes.
 User Authentication and Favorites functionalities planned!
 
 
-[Demo](https://lostmypillow.github.io/jquotes)
+[**Demo**](https://lostmypillow.github.io/jquotes)
+
+[Frontend GitHub repo](https://github.com/lostmypillow/jquotes-web)
 
 **A REMINDER:** The website will feel slow at first because I made the frontend interact with the API hosted on Render's free tier, which is slow to start if inactive for 15 minutes, please be patient!
 
