@@ -1,8 +1,8 @@
 version: '3.4'
 
 services:
-  server:
-    image: server
+  jquotes:
+    image: jquotes
     build:
       context: .
       dockerfile: ./Dockerfile
@@ -11,4 +11,4 @@ services:
     ports:
       - 3002:3002
       - 9229:9229
-    command: ["node", "--inspect=0.0.0.0:9229", "./bin/www"]
+    command: ["node", "--inspect=0.0.0.0:9229", "app.js"]
