@@ -8,7 +8,7 @@ RUN corepack enable
 RUN mkdir /app
 FROM base AS prod
 
-COPY pnpm-lock.yaml /app
+COPY ["package.json", "package-lock.json*", "pnpm-lock.yaml*", "/app/"]
 WORKDIR /app
 RUN pnpm fetch --prod
 
