@@ -5,7 +5,7 @@ ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
 ENV NODE_ENV=production
 RUN corepack enable
-
+RUN mkdir /app
 FROM base AS prod
 
 COPY pnpm-lock.yaml /app
@@ -17,6 +17,6 @@ RUN pnpm run build
 
 FROM base
 COPY --from=prod /app/node_modules /app/node_modules
-COPY --from=prod /app/dist /app/dist
+
 EXPOSE 3002
 CMD [ "pnpm", "prod" ]
