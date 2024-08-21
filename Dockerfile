@@ -2,7 +2,7 @@ FROM node:lts-alpine
 ENV NODE_ENV=production
 WORKDIR /usr/src/app
 RUN corepack enable
-COPY ["package.json", "package-lock.json*", "npm-shrinkwrap.json*", "./"]
+COPY ["package.json", "package-lock.json*", "pnpm-lock.json*", "./"]
 RUN pnpm install --production --silent && mv node_modules ../
 COPY . .
 EXPOSE 3002
