@@ -44,6 +44,6 @@ app.get("/wake", async (req, res) => {
   res.send("system online");
 });
 
-app.listen(port, () => {
+app.listen(port, '0.0.0.0', () => {
   console.log(`JQuotes listening on port 3002`);
 });
