@@ -1,11 +1,15 @@
-FROM node:lts-alpine
+FROM node:lts-alpine AS base
+ENV PNPM_HOME="/pnpm"
+ENV PATH="$PNPM_HOME:$PATH"
 ENV NODE_ENV=production
-WORKDIR /usr/src/app
-COPY ["package.json", "package-lock.json*", "npm-shrinkwrap.json*", "./"]
 RUN corepack enable
-RUN pnpm install --production --silent && mv node_modules ../
-COPY . .
-EXPOSE 3002
-RUN chown -R node /usr/src/app
-USER node
-CMD ["pnpm", "prod"]
+COPY . /app
+WORKDIR /app
+
+FROM base AS prod-deps
+RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --prod --frozen-lockfile
+
+FROM base
+COPY --from=prod-deps /app/node_modules /app/node_modules
+
+CMD ["node", "app.js"]
