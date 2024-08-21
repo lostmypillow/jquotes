@@ -1,41 +1,49 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+const compression = require('compression')
+const express = require("express");
+const app = express();
+const port = 3002;
+const fs = require("fs");
+app.use(compression())
+app.use((req, res, next) => {
+  res.setHeader(
+    "Access-Control-Allow-Origin",
+    "https://lostmypillow.github.io/jquotes-web"
+  );
+  res.setHeader("Access-Control-Allow-Origin", "http://localhost:5173");
+  res.setHeader(
+    "Access-Control-Allow-Methods",
+    "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS,CONNECT,TRACE"
+  );
+  res.setHeader(
+    "Access-Control-Allow-Headers",
+    "Content-Type, Authorization, X-Content-Type-Options, Accept, X-Requested-With, Origin, Access-Control-Request-Method, Access-Control-Request-Headers"
+  );
+  res.setHeader("Access-Control-Allow-Credentials", true);
+  res.setHeader("Access-Control-Allow-Private-Network", true);
+  res.setHeader("Access-Control-Max-Age", 7200);
 
-var indexRouter = require('./routes/index');
-var quoteRouter = require('./routes/quote');
-var cors = require('cors')
-var app = express();
-app.use(cors())
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
-
-app.use(logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
-
-app.use('/', indexRouter);
-app.use('/quote', quoteRouter);
-
-// catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  next(createError(404));
+  next();
 });
 
-// error handler
-app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
-
-  // render the error page
-  res.status(err.status || 500);
-  res.render('error');
+app.get("/", async (req, res) => {
+  // await betterCheck();
+  let path =
+    "./split_data_part" +
+    (Math.floor(Math.random() * 6) + 1).toString() +
+    ".json";
+  let quote = JSON.parse(
+    fs.readFileSync(require.resolve(path), {
+      encoding: "utf8",
+      flag: "r",
+    })
+  );
+  res.json(quote[Math.floor(Math.random() * quote.length)]);
 });
 
-module.exports = app;
+app.get("/wake", async (req, res) => {
+  res.send("system online");
+});
+
+app.listen(port, () => {
+  console.log(`JQuotes listening on port ${port}`);
+});

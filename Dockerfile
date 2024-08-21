@@ -8,4 +8,4 @@ COPY . .
 EXPOSE 3002
 RUN chown -R node /usr/src/app
 USER node
-CMD ["pnpm", "start"]
+CMD ["pnpm", "prod"]

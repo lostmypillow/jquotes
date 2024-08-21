@@ -1,0 +1,4 @@
+GET http://localhost:3002 HTTP/1.1
+
+###
+GET http://localhost:3002/wake HTTP/1.1
