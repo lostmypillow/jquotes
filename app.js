@@ -7,7 +7,7 @@ app.use(compression())
 app.use((req, res, next) => {
   res.setHeader(
     "Access-Control-Allow-Origin",
-    "https://lostmypillow.github.io/jquotes-web"
+    "https://lostmypillow.github.io/"
   );
   res.setHeader("Access-Control-Allow-Origin", "http://localhost:5173");
   res.setHeader(
