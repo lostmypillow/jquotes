@@ -1,7 +1,7 @@
 const compression = require('compression')
 const express = require("express");
 const app = express();
-const port = process.env.PORT || 3002;
+const port = 3002;
 const fs = require("fs");
 app.use(compression())
 app.use((req, res, next) => {
@@ -44,6 +44,6 @@ app.get("/wake", async (req, res) => {
   res.send("system online");
 });
 
-app.listen(3002, '0.0.0.0', () => {
+app.listen(port, () => {
   console.log(`JQuotes listening on port 3002`);
 });

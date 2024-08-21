@@ -1,12 +1,11 @@
 FROM node:lts-alpine
 ENV NODE_ENV=production
 WORKDIR /usr/src/app
-COPY ["package.json", "package-lock.json*", "pnpm-lock.yaml*", "./"]
+COPY ["package.json", "package-lock.json*", "npm-shrinkwrap.json*", "./"]
 RUN corepack enable
 RUN pnpm install --production --silent && mv node_modules ../
 COPY . .
-
+EXPOSE 3002
 RUN chown -R node /usr/src/app
 USER node
-CMD ["node", "app.js"]
-EXPOSE 3002
+CMD ["pnpm", "prod"]
