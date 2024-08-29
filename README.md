@@ -4,6 +4,8 @@ An Express API that returns a random quotes from a JSON file of quotes.
 
 User Authentication and Favorites functionalities planned!
 
+![image](https://github.com/user-attachments/assets/288e5453-b0d9-4201-877a-10559203ee39)
+
 
 [**Demo**](https://lostmypillow.github.io/jquotes-web)
 
